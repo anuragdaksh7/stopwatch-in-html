@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>stopwatch</title>
+    <<style media="screen">
+      body {
+        background-color: white;
+      }
+
+      #cont {
+        margin-top: 5vh;
+        display: flex;
+        justify-content: center;
+      }
+
+      #top-title {
+
+        padding: 20px;
+        padding-left: 50px;
+        padding-right: 50px;
+        width: fit-content;
+        display: flex;
+        justify-content: center;
+        background-color: rgba(0,0,255,0.55);
+        border: none;
+        box-shadow: 0px 0px 30px 1px rgb(0 0 0 / 99%);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+      }
+
+      h1 {
+        font-size: 40px;
+        color: black;
+      }
+
+      #stuff{
+        display: flex;
+        justify-content: center;
+      }
+
+      #timee {
+        margin-top: 4vh;
+        background-color: rgba(41,181,9,0.55);
+        color: white;
+        width: 80vw;
+        min-width: 40vw;
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 10px;
+        font-size: 35px;
+
+      }
+
+      #time_spent {
+        padding-inline-start: 10px;
+      }
+
+      #startstop {
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      .btns {
+        border: none;
+
+        font-size: 20px;
+        width: 15vw;
+        height: 5vw;
+        border-radius: 10px;
+        color: white;
+        background-color: #5c5c5c;
+      }
+
+      .btns:hover {
+        transition: 200ms;
+        background-color: #111111;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id = "cont">
+      <div id = "top-title">
+        <h1>stopwatch</h1>
+      </div>
+    </div>
+    <div id = "stuff">
+      <div id="timee">
+        <p id = "time_spent">
+          00 : 00 : 00
+        </p>
+
+        <div id= "startstop">
+          <button type="button" class = "btns" id = "start" onClick="start()" name="button">Start</button>
+          <button type="button" class = "btns" id = "stop" onClick="stop()" name="button">Stop</button>
+          <button type="button" class = "btns" id = "reset" onClick="reset()" name="button">Reset</button>
+
+        </div>
+      </div>
+    </div>
+  <script defer type="text/javascript">
+  time_ = 0;
+  time = document.getElementById("time_spent");
+
+  function convert(num) {
+    m = (Math.floor(num/60));
+    num = num%60
+    h = (Math.floor(m/60));
+
+
+    m = String(m%60);
+    h = String(h%60);
+    num = String(num);
+    if (Number(num)<10){
+      num = "0"+num;
+    }
+    if (Number(m)<10){
+      m = "0"+m;
+    }
+    if (Number(h)<10){
+      h = "0"+h;
+    }
+
+    return h+" : "+m+" : "+num;
+  }
+
+
+  running = false;
+
+  function start() {
+    running = true;
+  }
+
+  function stop() {
+    running = false;
+  }
+
+  function reset() {
+    time_ = 0;
+  }
+
+  setInterval(function update() {
+    time.innerHTML = convert(time_);
+    if (running == true){
+      time_ ++;
+    }
+  },1000);
+
+  </script>
+  </body>
+</html>
